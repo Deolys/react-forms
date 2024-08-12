@@ -1,0 +1,27 @@
+.headerWrapper {
+  max-width: 1600px;
+  width: 100%;
+  padding: 16px clamp(2.188rem, 1.027rem + 5.8vw, 6.25rem);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  background-color: #3d5a80;
+  color: white;
+  box-shadow: rgba(0, 0, 0, 0.2) 0 0 20px;
+}
+
+.navPanel {
+  display: flex;
+  gap: 12px;
+  a.active {
+    color: #00ffe5;
+    border-bottom: 2px solid #00ffe5;
+  }
+}
+

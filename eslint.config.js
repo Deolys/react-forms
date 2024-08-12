@@ -21,6 +21,7 @@ export default tseslint.config({
     'react-hooks': reactHooks,
     'react-refresh': reactRefresh,
     'react-compiler': reactCompiler,
+    ...eslintConfigPrettier.plugins,
     prettier: eslintPluginPrettier,
   },
   rules: {
@@ -45,6 +46,7 @@ export default tseslint.config({
         allowExpressions: true,
       },
     ],
+    ...eslintConfigPrettier.rules,
   },
   settings: {
     react: {
