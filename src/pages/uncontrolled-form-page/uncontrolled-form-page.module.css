@@ -1,0 +1,59 @@
+.formTitle {
+  text-align: center;
+  margin-block: 20px;
+}
+
+.formWrapper {
+  background-color: #e0fbfc;
+  max-width: 500px;
+  margin: 0 auto 70px;
+  padding: 16px;
+  border-radius: 16px;
+}
+
+.uncontrolledForm {
+  display: flex;
+  flex-direction: column;
+}
+
+.field {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+label,
+p {
+  font-weight: 500;
+  margin-top: 8px;
+  margin-bottom: 5px;
+}
+
+input {
+  color: #293241;
+
+  &:not([type='file']) {
+    height: 30px;
+    border: 1px solid #3d5a80;
+    border-radius: 8px;
+    padding-inline: 8px;
+  }
+  &[type='radio'],
+  &[type='checkbox'] {
+    width: 18px;
+    height: 18px;
+  }
+}
+
+.submitButton {
+  padding: 8px 16px;
+  margin-block: 20px;
+  font-size: 16px;
+  background-color: #3d5a80;
+  color: white;
+  border-radius: 20px;
+
+  &:disabled {
+    opacity: 0.5;
+  }
+}
