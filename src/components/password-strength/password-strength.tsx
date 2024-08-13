@@ -1,4 +1,4 @@
-import { useRef, type JSX } from 'react';
+import { type JSX } from 'react';
 import {
   capitalLetterRegExp,
   lowerLetterRegExp,
@@ -26,14 +26,12 @@ export function PasswordStrength({ password }: PasswordStrengthProps): JSX.Eleme
       strength += 25;
     }
   }
-  const strengthRef = useRef<number>(0);
-  strengthRef.current = strength;
 
   return (
     <>
       <label htmlFor="password-strength">strength:</label>
-      <progress id="password-strength" max="100" value={strengthRef.current}>
-        {strengthRef.current}%
+      <progress id="password-strength" max="100" value={strength}>
+        {strength}%
       </progress>
     </>
   );
