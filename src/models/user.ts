@@ -1,4 +1,10 @@
 import { countryNames } from '@/constants/countries';
+import {
+  capitalLetterRegExp,
+  lowerLetterRegExp,
+  numberRegExp,
+  specialCharacterRegExp,
+} from '@/constants/regexps';
 import { object, string, number, InferType, ref, mixed } from 'yup';
 
 export const userSchema = object().shape({
@@ -13,10 +19,10 @@ export const userSchema = object().shape({
   email: string().required('Enter the email').email('Incorrect email address'),
   password: string()
     .required('Enter the password')
-    .matches(/[!@#$%^&*\-+(),.?:{}|<>]/, 'At least one special character is required')
-    .matches(/\p{Ll}/u, 'At least one lowercased letter is required')
-    .matches(/\p{Lu}/u, 'At least one uppercased letter is required')
-    .matches(/[0-9]/, 'At least one number is required'),
+    .matches(specialCharacterRegExp, 'At least one special character is required')
+    .matches(lowerLetterRegExp, 'At least one lowercased letter is required')
+    .matches(capitalLetterRegExp, 'At least one uppercased letter is required')
+    .matches(numberRegExp, 'At least one number is required'),
   confirmPassword: string()
     .required('Repeat the password')
     .oneOf([ref('password')], 'Passwords do not match'),

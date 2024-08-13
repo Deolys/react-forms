@@ -1,0 +1,6 @@
+.errorMessage {
+  text-align: center;
+  p {
+    color: #e63946;
+  }
+}

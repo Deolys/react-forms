@@ -14,19 +14,41 @@
 .uncontrolledForm {
   display: flex;
   flex-direction: column;
+  & > label,
+  & > p {
+    font-weight: 500;
+    margin-top: 8px;
+    margin-bottom: 5px;
+  }
 }
 
-.field {
+.raw {
   display: flex;
   align-items: center;
   gap: 8px;
 }
 
-label,
-p {
-  font-weight: 500;
-  margin-top: 8px;
-  margin-bottom: 5px;
+.field {
+  display: flex;
+  flex-direction: column;
+  min-height: 75px;
+  & > label,
+  & > p {
+    font-weight: 500;
+    margin-bottom: 5px;
+  }
+  &.smallField {
+    min-height: 40px;
+  }
+  &.bigField {
+    min-height: 95px;
+  }
+}
+
+.strength {
+  & > label {
+    font-weight: 500;
+  }
 }
 
 input {
