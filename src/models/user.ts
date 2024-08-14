@@ -30,17 +30,17 @@ export const userSchema = object().shape({
   terms: string()
     .required('Accept the Terms and Conditions')
     .oneOf(['on'], 'Accept the Terms and Conditions'),
-  profileImage: mixed<FileList>()
+  profileImage: mixed<File>()
     .required('Choose a profile image')
     .test(
       'file size',
       'Image size should be less than 1Mb',
-      (value) => value && value[0] && value[0].size <= 1048576,
+      (value) => value && value.size <= 1048576,
     )
     .test(
       'file extension',
       'Only png and jpeg images are allowed',
-      (value) => value && value[0] && ['image/png', 'image/jpeg'].includes(value[0].type),
+      (value) => value && ['image/png', 'image/jpeg'].includes(value.type),
     ),
   country: string().required().oneOf(countryNames, 'Choose a country from the list'),
 });

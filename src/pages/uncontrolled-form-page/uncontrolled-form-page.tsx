@@ -36,16 +36,11 @@ export function UncontrolledFormPage(): JSX.Element {
     const formData: Record<string, unknown> = Object.fromEntries(form.entries());
     const profileImage = form.get('profileImage');
     passwordRef.current = form.get('password')?.toString();
-    if (profileImage instanceof File) {
-      const dt = new DataTransfer();
-      dt.items.add(profileImage);
-      formData.profileImage = dt.files;
-    }
 
     try {
       userSchema.validateSync(formData, { abortEarly: false });
-      if (formData.profileImage instanceof FileList) {
-        formData.profileImage = await convertImageToBase64(formData.profileImage[0]);
+      if (profileImage instanceof File) {
+        formData.profileImage = await convertImageToBase64(profileImage);
       }
       dispatch(addForm(formData));
       navigate(mainPath);
@@ -67,7 +62,7 @@ export function UncontrolledFormPage(): JSX.Element {
       <Header />
       <h1 className={styles.formTitle}>Uncontrolled components Form</h1>
       <div className={styles.formWrapper}>
-        <form className={styles.uncontrolledForm} onSubmit={handleSubmit} noValidate>
+        <form className={styles.form} onSubmit={handleSubmit} noValidate>
           <div className={styles.field}>
             <label htmlFor="name">Name:</label>
             <input
