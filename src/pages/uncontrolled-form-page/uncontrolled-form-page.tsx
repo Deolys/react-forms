@@ -3,11 +3,10 @@ import { Header } from '@/components/header';
 import styles from './uncontrolled-form-page.module.css';
 import { userSchema } from '@/models/user';
 import { ValidationError } from 'yup';
-import { countryNames } from '@/constants/countries';
 import { ErrorMessage } from '@/components/error-message';
 import { PasswordStrength } from '@/components/password-strength';
 import { convertImageToBase64 } from '@/utils/convert-image-to-base64';
-import { useAppDispatch } from '@/store/hooks';
+import { useAppDispatch, useAppSelector } from '@/store/hooks';
 import { addForm } from '@/store/slices/forms';
 import { useNavigate } from 'react-router-dom';
 import { mainPath } from '@/constants/route-paths';
@@ -17,6 +16,7 @@ type FormErrors = Record<string, string>;
 export function UncontrolledFormPage(): JSX.Element {
   const [errors, setErrors] = useState<FormErrors>({});
   const dispatch = useAppDispatch();
+  const countriesData = useAppSelector((state) => state.forms.countries);
   const navigate = useNavigate();
   const passwordRef = useRef<string | undefined>('');
   const isDisabled = Object.keys(errors).length > 0;
@@ -146,7 +146,7 @@ export function UncontrolledFormPage(): JSX.Element {
               onChange={handleInputChange}
             />
             <datalist id="countries">
-              {countryNames.map((name) => {
+              {countriesData.map((name) => {
                 return <option key={name} value={name} />;
               })}
             </datalist>

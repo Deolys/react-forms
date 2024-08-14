@@ -1,0 +1,8 @@
+.formsWrapper {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 0 20px;
+  margin: 0 auto;
+}
