@@ -6,6 +6,7 @@ import { ValidationError } from 'yup';
 import { countryNames } from '@/constants/countries';
 import { ErrorMessage } from '@/components/error-message';
 import { PasswordStrength } from '@/components/password-strength';
+import { convertImageToBase64 } from '@/utils/convert-image-to-base64';
 
 type FormErrors = Record<string, string>;
 
@@ -23,7 +24,7 @@ export function UncontrolledFormPage(): JSX.Element {
       });
     }
   };
-  const handleSubmit = (event: FormEvent<HTMLFormElement>): void => {
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>): Promise<void> => {
     event.preventDefault();
     const form = new FormData(event.currentTarget as HTMLFormElement);
     const formData: Record<string, unknown> = Object.fromEntries(form.entries());
@@ -37,6 +38,9 @@ export function UncontrolledFormPage(): JSX.Element {
 
     try {
       userSchema.validateSync(formData, { abortEarly: false });
+      if (formData.profileImage instanceof FileList) {
+        formData.profileImage = await convertImageToBase64(formData.profileImage[0]);
+      }
     } catch (error) {
       if (error instanceof ValidationError) {
         const errorsData: FormErrors = {};
