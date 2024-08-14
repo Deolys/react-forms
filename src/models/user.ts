@@ -8,27 +8,21 @@ import {
 import { object, string, number, InferType, ref, mixed } from 'yup';
 
 export const userSchema = object().shape({
-  name: string().when('$name', {
-    is: (value: string | undefined) => value === undefined || value.length === 0,
-    then: (schema) => schema.required('Enter the name'),
-    otherwise: (schema) => schema.matches(/^\p{Lu}/u, 'The name must begin with a capital letter'),
-  }),
+  name: string()
+    .matches(/^\p{Lu}/u, 'The name must begin with a capital letter')
+    .required('Enter the name'),
   age: number()
     .required('Enter the age')
     .positive('Age must be positive')
     .integer('Age must be integer')
     .typeError('Enter the age'),
   email: string().required('Enter the email').email('Incorrect email address'),
-  password: string().when('$password', {
-    is: (value: string | undefined) => value === undefined || value.length === 0,
-    then: (schema) => schema.required('Enter the password'),
-    otherwise: (schema) =>
-      schema
-        .matches(specialCharacterRegExp, 'At least one special character is required')
-        .matches(lowerLetterRegExp, 'At least one lowercased letter is required')
-        .matches(capitalLetterRegExp, 'At least one uppercased letter is required')
-        .matches(numberRegExp, 'At least one number is required'),
-  }),
+  password: string()
+    .matches(specialCharacterRegExp, 'At least one special character is required')
+    .matches(lowerLetterRegExp, 'At least one lowercased letter is required')
+    .matches(capitalLetterRegExp, 'At least one uppercased letter is required')
+    .matches(numberRegExp, 'At least one number is required')
+    .required('Enter the password'),
   confirmPassword: string()
     .required('Repeat the password')
     .oneOf([ref('password')], 'Passwords do not match'),
