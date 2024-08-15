@@ -8,8 +8,7 @@ import useUncontrolledForm from '@/hooks/use-uncontrolled-form';
 import { blockInvalidChar } from '@/utils/block-invalid-char-number';
 
 export function UncontrolledFormPage(): JSX.Element {
-  const { errors, handleInputChange, handleSubmit, isDisabled, passwordRef } =
-    useUncontrolledForm();
+  const { errors, handleSubmit, passwordRef } = useUncontrolledForm();
   const countriesData = useAppSelector((state) => state.forms.countries);
 
   return (
@@ -20,34 +19,22 @@ export function UncontrolledFormPage(): JSX.Element {
         <form className={styles.form} onSubmit={handleSubmit} noValidate>
           <div className={styles.field}>
             <label htmlFor="name">Name:</label>
-            <input
-              id="name"
-              type="text"
-              name="name"
-              autoComplete="name"
-              onChange={handleInputChange}
-            />
+            <input id="name" type="text" name="name" autoComplete="name" />
             {errors.name && <ErrorMessage text={errors.name} />}
           </div>
           <div className={styles.field}>
             <label htmlFor="age">Age:</label>
-            <input
-              id="age"
-              type="number"
-              name="age"
-              onKeyDown={blockInvalidChar}
-              onChange={handleInputChange}
-            />
+            <input id="age" type="number" name="age" onKeyDown={blockInvalidChar} />
             {errors.age && <ErrorMessage text={errors.age} />}
           </div>
           <div className={styles.field}>
             <label htmlFor="email">Email:</label>
-            <input id="email" type="email" name="email" onChange={handleInputChange} />
+            <input id="email" type="email" name="email" />
             {errors.email && <ErrorMessage text={errors.email} />}
           </div>
           <div className={`${styles.field} ${styles.bigField}`}>
             <label htmlFor="password">Password:</label>
-            <input id="password" type="password" name="password" onChange={handleInputChange} />
+            <input id="password" type="password" name="password" />
             <div className={styles.strength}>
               <div className={styles.raw}>
                 <PasswordStrength password={passwordRef.current} />
@@ -57,50 +44,27 @@ export function UncontrolledFormPage(): JSX.Element {
           </div>
           <div className={styles.field}>
             <label htmlFor="confirmPassword">Confirm password:</label>
-            <input
-              id="confirmPassword"
-              type="password"
-              name="confirmPassword"
-              onChange={handleInputChange}
-            />
+            <input id="confirmPassword" type="password" name="confirmPassword" />
             {errors.confirmPassword && <ErrorMessage text={errors.confirmPassword} />}
           </div>
           <div className={styles.field}>
             <p>Select gender:</p>
             <div className={styles.raw}>
-              <input
-                type="radio"
-                id="male"
-                name="gender"
-                value="male"
-                onChange={handleInputChange}
-              />
+              <input type="radio" id="male" name="gender" value="male" />
               <label htmlFor="male">Male</label>
-              <input
-                type="radio"
-                id="female"
-                name="gender"
-                value="female"
-                onChange={handleInputChange}
-              />
+              <input type="radio" id="female" name="gender" value="female" />
               <label htmlFor="female">Female</label>
             </div>
             {errors.gender && <ErrorMessage text={errors.gender} />}
           </div>
           <div className={styles.field}>
             <label htmlFor="profileImage">Profile Image:</label>
-            <input type="file" id="profileImage" name="profileImage" onChange={handleInputChange} />
+            <input type="file" id="profileImage" name="profileImage" />
             {errors.profileImage && <ErrorMessage text={errors.profileImage} />}
           </div>
           <div className={styles.field}>
             <label htmlFor="country">Choose a country:</label>
-            <input
-              type="text"
-              list="countries"
-              id="country"
-              name="country"
-              onChange={handleInputChange}
-            />
+            <input type="text" list="countries" id="country" name="country" />
             <datalist id="countries">
               {countriesData.map((name) => {
                 return <option key={name} value={name} />;
@@ -110,12 +74,12 @@ export function UncontrolledFormPage(): JSX.Element {
           </div>
           <div className={`${styles.field} ${styles.smallField}`}>
             <div className={styles.raw}>
-              <input id="terms" name="terms" type="checkbox" onChange={handleInputChange} />
+              <input id="terms" name="terms" type="checkbox" />
               <label htmlFor="terms">I agree to the Terms and Conditions</label>
             </div>
             {errors.terms && <ErrorMessage text={errors.terms} />}
           </div>
-          <button className={styles.submitButton} type="submit" disabled={isDisabled}>
+          <button className={styles.submitButton} type="submit">
             Submit
           </button>
         </form>
