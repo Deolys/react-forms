@@ -1,62 +1,15 @@
-import { ChangeEvent, useRef, useState, type FormEvent, type JSX } from 'react';
+import { type JSX } from 'react';
 import { Header } from '@/components/header';
 import styles from './uncontrolled-form-page.module.css';
-import { userSchema } from '@/models/user';
-import { ValidationError } from 'yup';
 import { ErrorMessage } from '@/components/error-message';
 import { PasswordStrength } from '@/components/password-strength';
-import { convertImageToBase64 } from '@/utils/convert-image-to-base64';
-import { useAppDispatch, useAppSelector } from '@/store/hooks';
-import { addForm } from '@/store/slices/forms';
-import { useNavigate } from 'react-router-dom';
-import { mainPath } from '@/constants/route-paths';
-
-type FormErrors = Record<string, string>;
+import { useAppSelector } from '@/store/hooks';
+import useUncontrolledForm from '@/hooks/use-uncontrolled-form';
 
 export function UncontrolledFormPage(): JSX.Element {
-  const [errors, setErrors] = useState<FormErrors>({});
-  const dispatch = useAppDispatch();
+  const { errors, handleInputChange, handleSubmit, isDisabled, passwordRef } =
+    useUncontrolledForm();
   const countriesData = useAppSelector((state) => state.forms.countries);
-  const navigate = useNavigate();
-  const passwordRef = useRef<string | undefined>('');
-  const isDisabled = Object.keys(errors).length > 0;
-  const handleInputChange = (event: ChangeEvent<HTMLInputElement>): void => {
-    const field = event.target.name;
-    if (errors[field]) {
-      setErrors((prev) => {
-        const newErrors = { ...prev };
-        delete newErrors[field];
-        return newErrors;
-      });
-    }
-  };
-  const handleSubmit = async (event: FormEvent<HTMLFormElement>): Promise<void> => {
-    event.preventDefault();
-    const form = new FormData(event.currentTarget as HTMLFormElement);
-    const formData: Record<string, unknown> = Object.fromEntries(form.entries());
-    const profileImage = form.get('profileImage');
-    formData.terms = form.get('terms')?.toString() === 'on';
-    passwordRef.current = form.get('password')?.toString();
-
-    try {
-      userSchema.validateSync(formData, { abortEarly: false });
-      if (profileImage instanceof File) {
-        formData.profileImage = await convertImageToBase64(profileImage);
-      }
-      dispatch(addForm(formData));
-      navigate(mainPath);
-    } catch (error) {
-      if (error instanceof ValidationError) {
-        const errorsData: FormErrors = {};
-        error.inner.forEach((item) => {
-          if (item.path) {
-            errorsData[item.path] = item.message;
-          }
-        });
-        setErrors(errorsData);
-      }
-    }
-  };
 
   return (
     <>

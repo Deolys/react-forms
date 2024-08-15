@@ -1,43 +1,15 @@
 import { type JSX } from 'react';
 import { Header } from '@/components/header';
 import styles from '../uncontrolled-form-page/uncontrolled-form-page.module.css';
-import { UserSchema, userSchema } from '@/models/user';
 import { ErrorMessage } from '@/components/error-message';
 import { PasswordStrength } from '@/components/password-strength';
-import { convertImageToBase64 } from '@/utils/convert-image-to-base64';
-import { useAppDispatch, useAppSelector } from '@/store/hooks';
-import { addForm } from '@/store/slices/forms';
-import { useNavigate } from 'react-router-dom';
-import { mainPath } from '@/constants/route-paths';
-import { SubmitHandler, useForm } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
+import { useAppSelector } from '@/store/hooks';
+import useControlledForm from '@/hooks/use-controlled-form';
 
 export function ControlledFormPage(): JSX.Element {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors, isDirty, isValid },
-    watch,
-  } = useForm<UserSchema>({
-    mode: 'onChange',
-    resolver: yupResolver(userSchema),
-  });
-  const password = watch('password');
-  const dispatch = useAppDispatch();
+  const { register, handleSubmit, errors, isDirty, isValid, password, onSubmit } =
+    useControlledForm();
   const countriesData = useAppSelector((state) => state.forms.countries);
-  const navigate = useNavigate();
-
-  const onSubmit: SubmitHandler<UserSchema> = async (data) => {
-    try {
-      if (data.profileImage instanceof File) {
-        const profileImage = await convertImageToBase64(data.profileImage);
-        dispatch(addForm({ ...data, profileImage }));
-        navigate(mainPath);
-      }
-    } catch (error) {
-      console.error(error);
-    }
-  };
 
   return (
     <>
