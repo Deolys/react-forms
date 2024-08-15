@@ -7,7 +7,7 @@ import styles from './main-page.module.css';
 export function MainPage(): JSX.Element {
   const formsData = useAppSelector((state) => state.forms.forms);
   return (
-    <>
+    <div className={styles.wrapper}>
       <Header />
       <div className={styles.formsWrapper}>
         {formsData.length ? (
@@ -20,7 +20,7 @@ export function MainPage(): JSX.Element {
           </div>
         )}
       </div>
-    </>
+    </div>
   );
 }
 

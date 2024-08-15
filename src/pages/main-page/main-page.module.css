@@ -1,3 +1,12 @@
+.wrapper {
+  min-height: 100vh;
+  background-image: url('../../assets/icons/blur-bg.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  overflow: hidden;
+}
+
 .formsWrapper {
   display: flex;
   justify-content: center;
