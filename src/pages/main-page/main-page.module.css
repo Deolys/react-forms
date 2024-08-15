@@ -6,3 +6,10 @@
   padding: 40px 0;
   margin: 0 auto;
 }
+
+.noFormsText {
+  padding: 12px 10px;
+  background-color: #e0fbfc;
+  border-radius: 8px;
+  border: 2px solid #3d5a80;
+}

@@ -10,9 +10,15 @@ export function MainPage(): JSX.Element {
     <>
       <Header />
       <div className={styles.formsWrapper}>
-        {formsData.map((form, index) => (
-          <FormTile key={form.email + index} formData={form} isLast={index === 0} />
-        ))}
+        {formsData.length ? (
+          formsData.map((form, index) => (
+            <FormTile key={form.email + index} formData={form} isLast={index === 0} />
+          ))
+        ) : (
+          <div className={styles.noFormsText}>
+            <p>There are no completed forms yet</p>
+          </div>
+        )}
       </div>
     </>
   );

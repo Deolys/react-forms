@@ -1,6 +1,6 @@
 import { type JSX } from 'react';
 import { Header } from '@/components/header';
-import styles from './uncontrolled-form-page.module.css';
+import styles from '@/styles/form-pages.module.css';
 import { ErrorMessage } from '@/components/error-message';
 import { PasswordStrength } from '@/components/password-strength';
 import { useAppSelector } from '@/store/hooks';
@@ -12,7 +12,7 @@ export function UncontrolledFormPage(): JSX.Element {
   const countriesData = useAppSelector((state) => state.forms.countries);
 
   return (
-    <>
+    <div className={styles.wrapperUncontrolled}>
       <Header />
       <h1 className={styles.formTitle}>Uncontrolled components Form</h1>
       <div className={styles.formWrapper}>
@@ -113,7 +113,7 @@ export function UncontrolledFormPage(): JSX.Element {
           </button>
         </form>
       </div>
-    </>
+    </div>
   );
 }
 

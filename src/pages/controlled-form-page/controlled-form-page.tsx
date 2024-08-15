@@ -1,6 +1,6 @@
 import { type JSX } from 'react';
 import { Header } from '@/components/header';
-import styles from '../uncontrolled-form-page/uncontrolled-form-page.module.css';
+import styles from '@/styles/form-pages.module.css';
 import { ErrorMessage } from '@/components/error-message';
 import { PasswordStrength } from '@/components/password-strength';
 import { useAppSelector } from '@/store/hooks';
@@ -12,7 +12,7 @@ export function ControlledFormPage(): JSX.Element {
   const countriesData = useAppSelector((state) => state.forms.countries);
 
   return (
-    <>
+    <div className={styles.wrapperControlled}>
       <Header />
       <h1 className={styles.formTitle}>React Hook Form</h1>
       <div className={styles.formWrapper}>
@@ -90,7 +90,7 @@ export function ControlledFormPage(): JSX.Element {
           </button>
         </form>
       </div>
-    </>
+    </div>
   );
 }
 

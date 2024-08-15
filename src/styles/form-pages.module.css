@@ -1,3 +1,19 @@
+.wrapperUncontrolled {
+  background-image: url('../assets/icons/lines-first-bg.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  overflow: hidden;
+}
+
+.wrapperControlled {
+  background-image: url('../assets/icons/lines-second-bg.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  overflow: hidden;
+}
+
 .formTitle {
   text-align: center;
   margin-block: 20px;
@@ -77,5 +93,6 @@ input {
 
   &:disabled {
     opacity: 0.5;
+    cursor: not-allowed;
   }
 }
