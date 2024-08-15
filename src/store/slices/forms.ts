@@ -2,9 +2,13 @@ import { countryNames } from '@/constants/countries';
 import { UserSchema } from '@/models/user';
 import { createSlice } from '@reduxjs/toolkit';
 
+export type IForm = Omit<UserSchema, 'profileImage'> & {
+  profileImage: string;
+};
+
 interface initialStateProps {
   countries: string[];
-  forms: UserSchema[];
+  forms: IForm[];
 }
 
 const initialState: initialStateProps = {

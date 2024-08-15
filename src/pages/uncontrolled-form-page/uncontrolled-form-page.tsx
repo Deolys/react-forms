@@ -35,6 +35,7 @@ export function UncontrolledFormPage(): JSX.Element {
     const form = new FormData(event.currentTarget as HTMLFormElement);
     const formData: Record<string, unknown> = Object.fromEntries(form.entries());
     const profileImage = form.get('profileImage');
+    formData.terms = form.get('terms')?.toString() === 'on';
     passwordRef.current = form.get('password')?.toString();
 
     try {

@@ -2,7 +2,7 @@ import type { JSX } from 'react';
 import styles from './error-message.module.css';
 
 interface ErrorMEssageProps {
-  text: string;
+  text?: string;
 }
 
 export function ErrorMessage({ text }: ErrorMEssageProps): JSX.Element {
