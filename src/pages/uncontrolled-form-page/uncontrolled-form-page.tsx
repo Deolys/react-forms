@@ -5,6 +5,7 @@ import { ErrorMessage } from '@/components/error-message';
 import { PasswordStrength } from '@/components/password-strength';
 import { useAppSelector } from '@/store/hooks';
 import useUncontrolledForm from '@/hooks/use-uncontrolled-form';
+import { blockInvalidChar } from '@/utils/block-invalid-char-number';
 
 export function UncontrolledFormPage(): JSX.Element {
   const { errors, handleInputChange, handleSubmit, isDisabled, passwordRef } =
@@ -30,7 +31,13 @@ export function UncontrolledFormPage(): JSX.Element {
           </div>
           <div className={styles.field}>
             <label htmlFor="age">Age:</label>
-            <input id="age" type="number" name="age" onChange={handleInputChange} />
+            <input
+              id="age"
+              type="number"
+              name="age"
+              onKeyDown={blockInvalidChar}
+              onChange={handleInputChange}
+            />
             {errors.age && <ErrorMessage text={errors.age} />}
           </div>
           <div className={styles.field}>

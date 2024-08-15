@@ -5,6 +5,7 @@ import { ErrorMessage } from '@/components/error-message';
 import { PasswordStrength } from '@/components/password-strength';
 import { useAppSelector } from '@/store/hooks';
 import useControlledForm from '@/hooks/use-controlled-form';
+import { blockInvalidChar } from '@/utils/block-invalid-char-number';
 
 export function ControlledFormPage(): JSX.Element {
   const { register, handleSubmit, errors, isDirty, isValid, password, onSubmit } =
@@ -30,7 +31,7 @@ export function ControlledFormPage(): JSX.Element {
           </div>
           <div className={styles.field}>
             <label htmlFor="age">Age:</label>
-            <input id="age" type="number" {...register('age')} />
+            <input id="age" type="number" onKeyDown={blockInvalidChar} {...register('age')} />
             {errors.age && <ErrorMessage text={errors.age.message} />}
           </div>
           <div className={styles.field}>
