@@ -1,50 +1,64 @@
-# React + TypeScript + Vite
+## React forms
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This project demonstrates a React application with two forms for user data collection, featuring comprehensive validation, data management using Redux, and image handling.
 
-Currently, two official plugins are available:
+Features:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Multiple Routes: 
+  * Main route displays collected data.
+  * Two separate routes for form submissions.
 
-## Expanding the ESLint configuration
+Data Collection and Management:
+  * Redux is used to store and manage form data from both forms.
+  * After form submission, the user is redirected to the main route.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+Form Validation:
+  * Yup library is used for validation in both forms.
+  * Error messages are displayed to guide users.
+  * Submit button is disabled until all required fields are filled and validation criteria are met.
 
-- Configure the top-level `parserOptions` property like this:
+ Form Fields:
+  * Both forms include fields for:
+    * Name
+    * Age
+    * Email
+    * Gender selection
+    * Terms and conditions acceptance checkbox
+  * Input for image upload.
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-});
+Image Handling:
+  * Image is saved as base64 encoded data.
+  * The uploaded image is displayed on the main route after redirection.
+
+Password Handling:
+  * Both forms include password fields with password strength indication.
+
+Autocomplete Feature:
+  * Autocomplete functionality is implemented in both forms to enhance user experience.
+
+Technical Details:
+
+1. Framework: React
+2. State Management: Redux
+3. Validation Library: Yup
+4. Image Handling: Base64 encoding
+
+This project showcases a robust approach to form validation in a React application.
+
+
+## Getting Started
+1. Clone the repository
+```bash
+  https://github.com/Deolys/react-forms.git
+```
+2. Install dependencies:
+
+```bash
+npm install
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+3. Run the development server:
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react';
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-});
+```bash
+npm run dev
 ```
